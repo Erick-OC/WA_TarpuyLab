@@ -1,11 +1,10 @@
 :root {
-  --green: #21C063;   /* Fondo sólido */
-  --text: #1e293b;    /* Gris oscuro para texto */
-  --muted: #475569;   /* Gris medio */
-  --accent: #facc15;  /* Amarillo dorado (opcional) */
-  --red: #FF0000;  
-  --black: #222222;  
-  --gris80: #333333; 
+  --green: #21C063;
+  --text: #1e293b;
+  --muted: #475569;
+  --red: #FF0000;
+  --black: #222222;
+  --gris80: #333333;
   --gris50: #808080;
   --gris30: #B3B3B3;
 }
@@ -17,15 +16,18 @@ body {
   background: var(--green);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   color: var(--text);
+  /* CENTRADO VERTICAL + HORIZONTAL DEL BLOQUE principal */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;   /* centra verticalmente */
+  align-items: center;       /* centra horizontalmente */
+  min-height: 100vh;
   padding: 20px;
+  text-align: center;
 }
 
 /* Título */
 .site-header h1 {
-  text-align: center;
   color: #fff;
   font-size: clamp(1.2rem, 2vw + 1rem, 1.8rem);
   font-weight: 800;
@@ -34,15 +36,11 @@ body {
   margin: 0 auto 22px;
 }
 
+/* Texto destacado con gradiente animado (izq → der) */
 .highlight {
   background: linear-gradient(
-    90deg, 
-    #111111,   /* gris muy oscuro */
-    #000000,   /* negro */
-    #FF0000,   /* rojo intenso */
-    #333333,   /* gris oscuro */
-    #000000,   /* negro otra vez */
-    #111111    /* gris muy oscuro */
+    90deg,
+    #111111, #000000, #FF0000, #333333, #000000, #111111
   );
   background-size: 300% 100%;
   -webkit-background-clip: text;
@@ -51,11 +49,16 @@ body {
   font-weight: 900;
   animation: gradient-move 6s linear infinite;
 }
-
-/* Animación gradiente */
 @keyframes gradient-move {
   0%   { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
+}
+
+/* MAIN centra su contenido */
+main{
+  width: 100%;
+  display: flex;
+  justify-content: center;   /* centra la tarjeta dentro de main */
 }
 
 /* Tarjeta QR */
@@ -66,7 +69,9 @@ body {
   width: min(100%, 420px);
   text-align: center;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  margin: 0 auto;            /* por si acaso, refuerza centrado */
 }
+
 .qr-card img {
   width: 100%;
   border-radius: 12px;
@@ -74,17 +79,17 @@ body {
   display: block;
   margin: 0 auto 12px;
 }
+
 .caption {
   font-size: 0.95rem;
   color: var(--muted);
   margin: 0 0 12px;
 }
 
-/* Botón */
-/* Botón */
+/* Botón CTA mejor UI y que resalte */
 .cta {
   display: inline-block;
-  margin-top: 14px;
+  margin-top: 6px;
   padding: 12px 22px;
   border: none;
   border-radius: 10px;
@@ -94,22 +99,19 @@ body {
   font-size: 1.05rem;
   font-weight: 700;
   cursor: pointer;
-  transition: background-position 0.4s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: background-position .4s ease, transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
 }
-
 .cta:hover {
-  background-position: 100% 0;   /* mueve el gradiente */
+  background-position: 100% 0;
   transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 6px 16px rgba(0,0,0,.35);
 }
 
-
-/* Footer */
+/* Footer: ya NO usa margin-top:auto para no empujar el contenido hacia arriba */
 .site-footer {
-  margin-top: auto;
+  margin-top: 24px;
   padding: 12px;
-  text-align: center;
   color: #fff;
   font-size: 0.85rem;
   opacity: 0.9;
