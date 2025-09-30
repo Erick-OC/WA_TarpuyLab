@@ -1,118 +1,130 @@
-:root {
-  --green: #21C063;
-  --text: #1e293b;
-  --muted: #475569;
-  --red: #FF0000;
-  --black: #222222;
-  --gris80: #333333;
-  --gris50: #808080;
-  --gris30: #B3B3B3;
+:root{
+  --green:#21C063;
+  --text:#1e293b;
+  --muted:#475569;
+  --red:#FF0000;
+  --black:#222222;
+  --gris80:#333333;
+  --gris50:#808080;
+  --gris30:#B3B3B3;
 }
 
-* { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; }
+/* base */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+html,body{overflow-x:hidden}           /* evita corte horizontal */
+body{
+  background:var(--green);
+  color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
 
-body {
-  background: var(--green);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  color: var(--text);
-  /* CENTRADO VERTICAL + HORIZONTAL DEL BLOQUE principal */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;   /* centra verticalmente */
-  align-items: center;       /* centra horizontalmente */
-  min-height: 100vh;
-  padding: 20px;
-  text-align: center;
+  /* móvil: NO centrar verticalmente; permitir scroll natural */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  min-height:100svh;                   /* corrige altura en móviles */
+  padding:16px;
+  text-align:center;
 }
 
-/* Título */
-.site-header h1 {
-  color: #fff;
-  font-size: clamp(1.2rem, 2vw + 1rem, 1.8rem);
-  font-weight: 800;
-  max-width: 900px;
-  line-height: 1.35;
-  margin: 0 auto 22px;
+/* encabezado */
+.site-header{width:100%;max-width:980px;padding:0 8px}
+.site-header h1{
+  color:#fff;
+  line-height:1.3;
+  margin:0 auto 16px;
+  /* móvil: más pequeño */
+  font-size:clamp(1rem,3.6vw + .8rem,1.6rem);
+  font-weight:800;
 }
 
-/* Texto destacado con gradiente animado (izq → der) */
-.highlight {
-  background: linear-gradient(
-    90deg,
-    #111111, #000000, #FF0000, #333333, #000000, #111111
-  );
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-weight: 900;
-  animation: gradient-move 6s linear infinite;
+/* efecto del span (igual que tenías) */
+.highlight{
+  background:linear-gradient(90deg,#111,#000,#FF0000,#333,#000,#111);
+  background-size:300% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  font-weight:900;
+  animation:gradient-move 6s linear infinite;
 }
-@keyframes gradient-move {
-  0%   { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+@keyframes gradient-move{
+  0%{background-position:0% 50%}
+  100%{background-position:100% 50%}
 }
 
-/* MAIN centra su contenido */
+/* main centra horizontalmente la tarjeta */
 main{
-  width: 100%;
-  display: flex;
-  justify-content: center;   /* centra la tarjeta dentro de main */
+  width:100%;
+  display:flex;
+  justify-content:center;
+  padding:8px;
 }
 
-/* Tarjeta QR */
-.qr-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 20px;
-  width: min(100%, 420px);
-  text-align: center;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  margin: 0 auto;            /* por si acaso, refuerza centrado */
+/* tarjeta */
+.qr-card{
+  width:clamp(280px,92vw,420px);       /* nunca se sale de la pantalla */
+  background:#fff;
+  border-radius:14px;
+  padding:16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+  margin:0 auto;
+}
+.qr-card img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:12px;
+  border:1px solid #e2e8f0;
+  margin:0 auto 10px;
+}
+.caption{
+  font-size:.92rem;
+  color:var(--muted);
+  margin:0 0 10px;
 }
 
-.qr-card img {
-  width: 100%;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  display: block;
-  margin: 0 auto 12px;
+/* botón (si lo usas) */
+.cta{
+  width:100%;                          /* full width en móvil */
+  padding:12px 18px;
+  border:none;
+  border-radius:12px;
+  color:#fff;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  background:linear-gradient(90deg,#111,#000,#FF0000,#333,#000,#111);
+  background-size:300% 100%;
+  animation:gradient-move 6s linear infinite;
+  transition:transform .2s, box-shadow .2s;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+}
+.cta:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+
+/* footer */
+.site-footer{
+  width:100%;
+  max-width:980px;
+  padding:12px;
+  color:#fff;
+  font-size:.85rem;
+  opacity:.9;
+  margin-top:16px;                      /* separación del contenido */
 }
 
-.caption {
-  font-size: 0.95rem;
-  color: var(--muted);
-  margin: 0 0 12px;
-}
-
-/* Botón CTA mejor UI y que resalte */
-.cta {
-  display: inline-block;
-  margin-top: 6px;
-  padding: 12px 22px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #FF0000, #333333, #000000);
-  background-size: 200% 100%;
-  color: #fff;
-  font-size: 1.05rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-position .4s ease, transform .2s ease, box-shadow .2s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,.25);
-}
-.cta:hover {
-  background-position: 100% 0;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0,0,0,.35);
-}
-
-/* Footer: ya NO usa margin-top:auto para no empujar el contenido hacia arriba */
-.site-footer {
-  margin-top: 24px;
-  padding: 12px;
-  color: #fff;
-  font-size: 0.85rem;
-  opacity: 0.9;
+/* desktop/tablet: centramos vertical si cabe todo */
+@media (min-width: 900px){
+  body{
+    justify-content:center;             /* ahora sí, centrado vertical */
+    padding:24px;
+  }
+  .site-header h1{
+    font-size:clamp(1.2rem,2vw + 1rem,1.8rem);
+    margin-bottom:22px;
+  }
+  .qr-card{padding:20px;border-radius:16px}
+  .caption{font-size:.95rem}
+  .cta{width:auto;padding:12px 24px}
 }
